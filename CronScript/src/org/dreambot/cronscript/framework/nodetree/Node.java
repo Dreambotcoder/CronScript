@@ -14,4 +14,5 @@ public abstract class Node {
     public abstract boolean onValid();
 
     public abstract int onLoop();
+
 }

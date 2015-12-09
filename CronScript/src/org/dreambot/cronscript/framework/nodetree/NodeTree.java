@@ -65,8 +65,8 @@ public abstract class NodeTree extends Node implements Comparator<Node> {
 
     @Override
     public int onLoop() {
-        Optional<Node> opt = getCandidateLeaf();
-        return (opt.isPresent() ? opt.get().onLoop() : sleepTime);
+        Optional<Node> candidate = getCandidateLeaf();
+        return (candidate.isPresent() ? candidate.get().onLoop() : sleepTime);
     }
 
 }

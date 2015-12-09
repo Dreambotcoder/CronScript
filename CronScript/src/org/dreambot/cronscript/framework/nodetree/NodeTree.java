@@ -1,13 +1,15 @@
 package org.dreambot.cronscript.framework.nodetree;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Cath on 9/12/2015.
  */
 
-public abstract class NodeTree extends Node {
+public abstract class NodeTree extends Node implements Comparator<Node> {
 
     private List<Node> nodeList;
 
@@ -16,23 +18,24 @@ public abstract class NodeTree extends Node {
         nodeList = new ArrayList<>();
     }
 
-    @Override
-    public String getStatus() {
-        return null;
+
+    public Node[] getLeaves() {
+        return nodeList.toArray(new Node[nodeList.size()]);
     }
 
     @Override
-    public int priority() {
-        return 0;
-    }
-
-    @Override
-    public boolean onValid() {
-        return false;
+    public int compare(Node node1, Node node2) {
+        return node1.priority() - node2.priority();
     }
 
     @Override
     public int onLoop() {
-        return 0;
+        return  nodeList.stream()
+                .filter(Objects::nonNull)
+                .filter(Node::onValid)
+                .findFirst()
+                .get()
+                .onLoop();
     }
+
 }

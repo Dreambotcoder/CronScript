@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CronScript.iml" filepath="$PROJECT_DIR$/CronScript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CronScript/CronScript.iml" filepath="$PROJECT_DIR$/CronScript/CronScript.iml" />
     </modules>
   </component>
 </project>

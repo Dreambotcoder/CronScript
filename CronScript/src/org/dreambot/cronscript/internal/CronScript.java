@@ -12,6 +12,15 @@ import org.dreambot.cronscript.framework.nodetree.TreeController;
  */
 public abstract class CronScript extends AbstractScript {
 
+    /**
+     * Our root NodeTree component, where all other NodeTrees are built under
+     */
+    private NodeTree rootTree;
+
+    /**
+     * Controller within the root NodeTree
+     */
+    private TreeController treeController;
 
     public CronScript() {
         rootTree = new NodeTree(0) {
@@ -33,8 +42,6 @@ public abstract class CronScript extends AbstractScript {
         treeController = new TreeController(rootTree);
     }
 
-    private NodeTree rootTree;
-    private TreeController treeController;
     /**
      * Check for stuff/conditions for the script to start
      * @return True if allowed to start, false if conditions are not met (shutdown)
@@ -46,6 +53,9 @@ public abstract class CronScript extends AbstractScript {
      */
     public abstract void onStartActions();
 
+    /**
+     * Onstart method
+     */
     public void onStart() {
         if (onStartCondition()) {
             onStartActions();
@@ -54,7 +64,11 @@ public abstract class CronScript extends AbstractScript {
         }
     }
 
-    public TreeController getTreeController() {
+    /**
+     * Only should be using the controller in the main logic script class, thus protected modifier
+     * @return
+     */
+    protected TreeController getTreeController() {
         return treeController;
     }
 

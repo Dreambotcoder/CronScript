@@ -1,6 +1,7 @@
 package org.dreambot.cronscript.internal;
 
 import org.dreambot.api.script.AbstractScript;
+import org.dreambot.cronscript.framework.nodetree.Node;
 import org.dreambot.cronscript.framework.nodetree.NodeTree;
 import org.dreambot.cronscript.framework.nodetree.TreeController;
 
@@ -23,7 +24,7 @@ public abstract class CronScript extends AbstractScript {
     private TreeController treeController;
 
     public CronScript() {
-        rootTree = new NodeTree(0) {
+        rootTree = new NodeTree(this,0) {
             @Override
             public String getStatus() {
                 return this.getCandidateLeaf().get().getStatus();
@@ -54,6 +55,12 @@ public abstract class CronScript extends AbstractScript {
     public abstract void onStartActions();
 
     /**
+     * Event fired when a Node is activated
+     * @param node the activated node
+     */
+    public abstract void onNodeActivation(Node node);
+
+    /**
      * Onstart method
      */
     public void onStart() {
@@ -68,8 +75,10 @@ public abstract class CronScript extends AbstractScript {
      * Only should be using the controller in the main logic script class, thus protected modifier
      * @return
      */
-    protected TreeController getTreeController() {
+    protected TreeController getController() {
         return treeController;
     }
+
+
 
 }

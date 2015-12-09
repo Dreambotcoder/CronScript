@@ -1,7 +1,9 @@
 package org.dreambot.cronscript.framework.nodetree;
 
 /**
- * Created by Cath on 9/12/2015.
+ * Project:     Dreambot
+ * Author:      Articron
+ * Date:        9/12/2015
  */
 public abstract class Node {
 

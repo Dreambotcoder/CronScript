@@ -1,7 +1,6 @@
 package org.dreambot.cronscript.internal;
 
 import org.dreambot.api.script.AbstractScript;
-import org.dreambot.cronscript.framework.nodetree.Node;
 import org.dreambot.cronscript.framework.nodetree.NodeTree;
 import org.dreambot.cronscript.framework.nodetree.TreeController;
 
@@ -13,18 +12,14 @@ import org.dreambot.cronscript.framework.nodetree.TreeController;
  */
 public abstract class CronScript extends AbstractScript {
 
-    /**
-     * Our root NodeTree component, where all other NodeTrees are built under
-     */
     private NodeTree rootTree;
-
-    /**
-     * Controller within the root NodeTree
-     */
     private TreeController treeController;
 
+    public abstract boolean onStartCondition();
+    public abstract void onStartActions();
+
     public CronScript() {
-        rootTree = new NodeTree(this,0) {
+        rootTree = new NodeTree(0) {
             @Override
             public String getStatus() {
                 return this.getCandidateLeaf().get().getStatus();
@@ -43,26 +38,6 @@ public abstract class CronScript extends AbstractScript {
         treeController = new TreeController(rootTree);
     }
 
-    /**
-     * Check for stuff/conditions for the script to start
-     * @return True if allowed to start, false if conditions are not met (shutdown)
-     */
-    public abstract boolean onStartCondition();
-
-    /**
-     * Actions to do before going into script loop
-     */
-    public abstract void onStartActions();
-
-    /**
-     * Event fired when a Node is activated
-     * @param node the activated node
-     */
-    public abstract void onNodeActivation(Node node);
-
-    /**
-     * Onstart method
-     */
     public void onStart() {
         if (onStartCondition()) {
             onStartActions();
@@ -71,14 +46,8 @@ public abstract class CronScript extends AbstractScript {
         }
     }
 
-    /**
-     * Only should be using the controller in the main logic script class, thus protected modifier
-     * @return
-     */
     protected TreeController getController() {
         return treeController;
     }
-
-
 
 }

@@ -7,6 +7,8 @@ package org.dreambot.cronscript.framework.nodetree;
  */
 public abstract class Node {
 
+    public boolean isTree = false;
+
     public abstract String getStatus();
 
     public abstract int priority();

@@ -1,6 +1,5 @@
 package org.dreambot.cronscript.framework.nodetree;
 
-import org.dreambot.cronscript.internal.CronScript;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,12 +14,11 @@ public abstract class NodeTree extends Node implements Comparator<Node> {
 
     private List<Node> nodeList;
     private int sleepTime;
-    private CronScript script;
 
-    public NodeTree(CronScript script, int sleepTime) {
+    public NodeTree(int sleepTime) {
         nodeList = new ArrayList<>();
         this.sleepTime = sleepTime;
-        this.script = script;
+        isTree = true;
     }
 
     public NodeTree addLeaves(Node... leaves) {
@@ -62,10 +60,6 @@ public abstract class NodeTree extends Node implements Comparator<Node> {
         return getValidLeaveStream().findFirst();
     }
 
-    public boolean hasValidLeaf() {
-        return getCandidateLeaf().isPresent();
-    }
-
     @Override
     public int compare(Node node1, Node node2) {
         return node1.priority() - node2.priority();
@@ -74,11 +68,7 @@ public abstract class NodeTree extends Node implements Comparator<Node> {
     @Override
     public int onLoop() {
         Optional<Node> candidate = getCandidateLeaf();
-        if (candidate.isPresent()) {
-            script.onNodeActivation(candidate.get());
-            return candidate.get().onLoop();
-        }
-        return sleepTime;
+        return candidate.isPresent() ? candidate.get().onLoop() : sleepTime;
     }
 
 }

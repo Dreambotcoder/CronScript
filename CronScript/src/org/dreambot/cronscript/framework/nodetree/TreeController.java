@@ -1,5 +1,8 @@
 package org.dreambot.cronscript.framework.nodetree;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * Project:     Dreambot
  * Author:      Articron
@@ -22,7 +25,11 @@ public class TreeController  {
     }
 
     public int onLoop() {
-        return root.getCandidateLeaf().get().onLoop();
+        return root.onLoop();
+    }
+
+    public NodeTree[] getTrees() {
+        return (NodeTree[]) Arrays.stream(root.getLeaves()).filter(Objects::nonNull).filter(node -> node.isTree).toArray();
     }
 
 }

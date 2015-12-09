@@ -16,7 +16,7 @@ public class Faggot {
     }
 
     public void checkForArno() {
-        if(name.equalsIgnoreCase("arno")) {
+        if(name.equalsIgnoreCase("Yassin")) {
             penis = false;
             balls = -1;
         }

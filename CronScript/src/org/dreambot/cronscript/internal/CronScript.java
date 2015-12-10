@@ -12,41 +12,40 @@ import org.dreambot.cronscript.framework.nodetree.TreeController;
  */
 public abstract class CronScript extends AbstractScript {
 
-    private NodeTree rootTree;
-    private TreeController treeController;
+    private static TreeController treeController;
 
     public abstract boolean onStartCondition();
     public abstract void onStartActions();
 
     public CronScript() {
-        rootTree = new NodeTree(0) {
+        NodeTree root = new NodeTree(0) {
             @Override
             public String getStatus() {
                 return this.getCandidateLeaf().get().getStatus();
             }
-
             @Override
             public int priority() {
                 return 1;
             }
-
             @Override
             public boolean onValid() {
                 return true;
             }
         };
-        treeController = new TreeController(rootTree);
+        treeController = new TreeController(root);
     }
 
     public void onStart() {
         if (onStartCondition()) {
+            System.out.println("START");
             onStartActions();
         } else {
+            System.out.println("STOP");
             stop();
         }
     }
 
-    protected TreeController getController() {
+    protected static TreeController getController() {
         return treeController;
     }
 

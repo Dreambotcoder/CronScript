@@ -11,7 +11,7 @@ import java.util.List;
 public class PaintController {
 
     private ColourPalette theme;
-    private List<PaintComponent> componentList;
+    private List<ComponentWrapper> componentList;
 
     public PaintController() {
         theme = ColourPalette.ROCKET_THEME;
@@ -23,6 +23,5 @@ public class PaintController {
     }
 
     public void onPaint(Graphics g) {
-        componentList.stream().forEach(componentList -> componentList.onPaint(g));
     }
 }

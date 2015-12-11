@@ -1,6 +1,7 @@
 package org.dreambot.cronscript.internal;
 
 import org.dreambot.api.script.AbstractScript;
+import org.dreambot.cronscript.awt.PaintController;
 import org.dreambot.cronscript.framework.nodetree.NodeTree;
 import org.dreambot.cronscript.framework.nodetree.TreeController;
 
@@ -12,7 +13,8 @@ import org.dreambot.cronscript.framework.nodetree.TreeController;
  */
 public abstract class CronScript extends AbstractScript {
 
-    private static TreeController treeController;
+    private TreeController treeController;
+    private PaintController paintController;
 
     public abstract boolean onStartCondition();
     public abstract void onStartActions();
@@ -37,16 +39,18 @@ public abstract class CronScript extends AbstractScript {
 
     public void onStart() {
         if (onStartCondition()) {
-            System.out.println("START");
             onStartActions();
         } else {
-            System.out.println("STOP");
             stop();
         }
     }
 
-    protected static TreeController getController() {
+    protected TreeController getTreeController() {
         return treeController;
+    }
+
+    protected PaintController getPaintController() {
+        return paintController;
     }
 
 }

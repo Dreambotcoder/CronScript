@@ -1,7 +1,8 @@
 package org.dreambot.cronscript.awt;
 
+
+
 import java.awt.*;
-import java.util.List;
 
 /**
  * Project:     Dreambot
@@ -11,12 +12,10 @@ import java.util.List;
 public class PaintController {
 
     private ColourPalette theme;
-    private List<ComponentWrapper> componentList;
 
     public PaintController() {
         theme = ColourPalette.ROCKET_THEME;
     }
-
 
     public void setTheme(ColourPalette theme) {
         this.theme = theme;

@@ -19,7 +19,6 @@ public class BackgroundFactory implements ComponentFactory<BackgroundBox> {
     private ColourPalette theme;
     private List<BackgroundBox> components;
 
-
     @Override
     public void setTheme(ColourPalette theme) {
         this.theme = theme;

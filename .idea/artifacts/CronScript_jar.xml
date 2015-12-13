@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="CronScript:jar">
+    <output-path>$USER_HOME$/DreamBot/Scripts</output-path>
+    <root id="archive" name="CronScript.jar">
+      <element id="module-output" name="CronScript" />
+    </root>
+  </artifact>
+</component>
